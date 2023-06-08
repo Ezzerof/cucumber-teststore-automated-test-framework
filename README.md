@@ -1,7 +1,7 @@
-#Automated Test Framework of Teststore using Cucumber
+# Automated Test Framework of Teststore using Cucumber
 This repository contains an automated test framework for Teststore, implemented using Cucumber. The framework utilizes various libraries and tools such as Cucumber, Selenium, JUnit, and Hamcrest to create and execute automated tests.
 
-##Dependencies
+## Dependencies
 The following dependencies are required to use the automated test framework:
 
 - Cucumber: A behavior-driven development (BDD) testing tool that allows you to write test scenarios in a natural language format.
