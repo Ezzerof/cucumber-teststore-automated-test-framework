@@ -1,6 +1,13 @@
 # Automated Test Framework of Teststore using Cucumber
 This repository contains an automated test framework for Teststore, implemented using Cucumber. The framework utilizes various libraries and tools such as Cucumber, Selenium, JUnit, and Hamcrest to create and execute automated tests.
 
+## Supported Browsers
+
+The automated test framework supports the following browser versions:
+
+- Chrome: Version 114.0.5735.110
+- Edge: Version 114.0.1823.41
+
 ## Dependencies
 The following dependencies are required to use the automated test framework:
 
