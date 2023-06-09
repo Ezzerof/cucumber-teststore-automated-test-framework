@@ -10,4 +10,5 @@ public class ContactUsPage {
     private final By messageField = new By.ByCssSelector("textarea[placeholder='How can we help?']");
     private final By checkbox = new By.ByCssSelector("#psgdpr_consent_checkbox_1");
     private final By sendButton = new By.ByCssSelector("input[value='Send']");
+    private final By confirmationMessage = new By.ByCssSelector("div[class='col-xs-12 alert alert-success'] ul li");
 }
