@@ -6,11 +6,14 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
+import teststore.chris.TestRunner;
 import teststore.chris.pom.RegistrationPage;
 import teststore.chris.pom.SignInPage;
 import teststore.chris.utils.WebDriverSetup;
 
 import java.util.ResourceBundle;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class SignUpStepdefs {
     private WebDriverSetup driverSetup;
@@ -19,6 +22,7 @@ public class SignUpStepdefs {
     private RegistrationPage registrationPage;
     private ResourceBundle resourceBundle;
     private String browserName;
+    private static final Logger logger = LogManager.getLogger(TestRunner.class);
 
     @Before("@CreateUser")
     public void setup() {
