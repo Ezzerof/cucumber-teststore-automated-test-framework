@@ -11,13 +11,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import teststore.chris.pom.HomePage;
+import teststore.chris.TestRunner;
+
 import teststore.chris.pom.RegistrationPage;
 import teststore.chris.pom.SignInPage;
 import teststore.chris.utils.WebDriverSetup;
 
 import java.time.Duration;
 import java.util.ResourceBundle;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -29,7 +32,10 @@ public class SignUpStepdefs {
     private RegistrationPage registrationPage;
     private ResourceBundle resourceBundle;
     private String browserName;
+
     private String userName;
+    private static final Logger logger = LogManager.getLogger(TestRunner.class);
+
 
     @Before("@CreateUser")
     public void setup() {
