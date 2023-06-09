@@ -1,5 +1,6 @@
 package teststore.chris.pom;
 
+import io.cucumber.java.ro.Si;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -14,4 +15,16 @@ public class HomePage {
     private final By artButton = new By.ByXPath("//a[normalize-space()='Art']");
     private final By searchBar = new By.ByCssSelector("input[placeholder='Search our catalog']");
 
+    public HomePage(WebDriver webDriver) {
+        this.webDriver = webDriver;
+        goToHomePage();
+    }
+
+    public void goToHomePage() {
+        webDriver.get("http://teststore.automationtesting.co.uk/");
+    }
+    public SignInPage goToSignInPage() {
+        webDriver.findElement(signInButton).click();
+        return new SignInPage(webDriver);
+    }
 }
