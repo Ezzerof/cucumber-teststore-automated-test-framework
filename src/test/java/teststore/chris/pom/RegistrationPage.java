@@ -3,7 +3,7 @@ package teststore.chris.pom;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class CreateAccountPage {
+public class RegistrationPage {
     private WebDriver webDriver;
     private final By loginButton = new By.ByXPath("//a[normalize-space()='Log in instead!']");
     private final By mrSocialTitle = new By.ByXPath("input[value='1']");
