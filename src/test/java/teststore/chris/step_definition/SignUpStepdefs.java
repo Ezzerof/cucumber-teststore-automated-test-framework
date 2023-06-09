@@ -13,6 +13,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import teststore.chris.TestRunner;
 
+import teststore.chris.pom.HomePage;
 import teststore.chris.pom.RegistrationPage;
 import teststore.chris.pom.SignInPage;
 import teststore.chris.utils.WebDriverSetup;
