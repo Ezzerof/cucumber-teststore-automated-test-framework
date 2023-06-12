@@ -2,9 +2,10 @@ Feature: Log in into personal account
 
   @LogIn
   Scenario Outline: Log in with valid details
-    Given I am on Log in page
+    Given I lunch the browser
+    And I go to Log in page
     When I enter "<email>"
-    And I enter "<password>"
+    And I then enter "<password>"
     Then I will go to my account
     Examples:
       | email                       | password |
@@ -15,9 +16,10 @@ Feature: Log in into personal account
 
   @LogIn
     Scenario Outline: Log in with invalid details
-    Given I am on Log in page
+    Given I lunch the browser
+    And I go to Log in page
     When I enter invalid "<email>"
-    And I enter invalid "<password>"
+    And I enter an invalid "<password>"
     Then I will remain on Log in page
     Examples:
       | email                 | password |
