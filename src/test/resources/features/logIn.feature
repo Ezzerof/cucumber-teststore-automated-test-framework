@@ -1,30 +1,32 @@
 Feature: Log in into personal account
 
   @LogIn
-  Scenario Outline: Log in with valid details
+  Scenario: Log in with valid details
     Given I lunch the browser
     And I go to Log in page
-    When I enter "<email>"
-    And I then enter "<password>"
+    When I enter "dan.williams@gmail.com"
+    And I then enter "1234567a"
     Then I will go to my account
-    Examples:
-      | email                       | password |
-      | jo.williams@gmail.com       | 123456a |
-      | j.williams@gmail.com        | 123456a |
-      | danniel.williams@gmail.com  | 123456a |
-      | dan.williams@gmail.com      | 1234567a |
 
   @LogIn
-    Scenario Outline: Log in with invalid details
+  Scenario: Log in with invalid email
     Given I lunch the browser
     And I go to Log in page
-    When I enter invalid "<email>"
-    And I enter an invalid "<password>"
+    When I enter invalid "chris.john@gmail.com"
+    And I then enter "1234567a"
     Then I will remain on Log in page
-    Examples:
-      | email                 | password |
-      | chris.john@gmail.com  | 498325 |
-      | melisa.com            | 1235898 |
-      | !                     | £"$! |
-      | admin                 | admin |
 
+  @LogIn
+  Scenario: Log in with invalid password
+    Given I lunch the browser
+    And I go to Log in page
+    When I enter "dan.williams@gmail.com"
+    And I enter an invalid "498325"
+    Then I will remain on Log in page
+
+  @LogIn
+  Scenario: Log in with empty fields
+    Given I lunch the browser
+    And I go to Log in page
+    When I click on sing in button
+    Then I will remain on Log in page
