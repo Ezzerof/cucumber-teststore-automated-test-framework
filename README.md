@@ -39,11 +39,6 @@ The following dependencies are required to use the automated test framework:
       <artifactId>junit-jupiter</artifactId>
       <version>5.9.2</version>
     </dependency>
-    <dependency>
-      <groupId>org.junit.vintage</groupId>
-      <artifactId>junit-vintage-engine</artifactId>
-      <version>5.9.2</version>
-    </dependency>
 ```
 - Hamcrest: A library of matchers that can be used with JUnit to create expressive and readable test assertions.
 ```
