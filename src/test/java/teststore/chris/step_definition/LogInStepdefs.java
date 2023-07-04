@@ -18,7 +18,8 @@ import teststore.chris.utils.WebDriverSetup;
 import java.time.Duration;
 import java.util.ResourceBundle;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.*;
+
 
 public class LogInStepdefs {
     private WebDriverSetup driverSetup;
@@ -28,6 +29,7 @@ public class LogInStepdefs {
     private ResourceBundle resourceBundle;
     private String browserName;
     private static final Logger logger = LogManager.getLogger(TestRunner.class);
+    private String pageTitle;
 
 
     @Before("@LogIn")
@@ -99,5 +101,11 @@ public class LogInStepdefs {
 
     @Then("I will remain on Log in page")
     public void iWillRemainOnLogInPage() {
+        assertTrue(!signInPage.getH1LogInToYourAccount().getText().isEmpty());
+    }
+
+    @When("I click on sing in button")
+    public void iClickOnSingInButton() {
+        signInPage.clickOnSignIn();
     }
 }

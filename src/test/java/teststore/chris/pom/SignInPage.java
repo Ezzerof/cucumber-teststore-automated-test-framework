@@ -2,6 +2,7 @@ package teststore.chris.pom;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class SignInPage {
 
@@ -11,6 +12,7 @@ public class SignInPage {
     private final By signInButton = new By.ByCssSelector("#submit-login");
     private final By forgotPasswordButton = new By.ByXPath("//a[normalize-space()='Forgot your password?']");
     private final By createAccountButton = new By.ByXPath("//a[normalize-space()='No account? Create one here']");
+    private final By logInToYourAccountH1 = new By.ByXPath("//section[@id='main']//h1[1]");
 
     public SignInPage(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -40,4 +42,8 @@ public class SignInPage {
     public void clickOnSignIn() {
         webDriver.findElement(signInButton).click();
     }
+    public WebElement getH1LogInToYourAccount() {
+        return webDriver.findElement(logInToYourAccountH1);
+    }
+
 }
