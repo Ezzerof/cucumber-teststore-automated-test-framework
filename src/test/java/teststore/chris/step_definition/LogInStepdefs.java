@@ -13,7 +13,7 @@ import org.openqa.selenium.*;
 import teststore.chris.TestRunner;
 import teststore.chris.pom.HomePage;
 import teststore.chris.pom.SignInPage;
-import teststore.chris.utils.WebDriverSetup;
+import teststore.chris.utils.WebDriverConfiguration;
 
 import java.time.Duration;
 import java.util.ResourceBundle;
@@ -22,19 +22,19 @@ import static org.junit.Assert.*;
 
 
 public class LogInStepdefs {
-    private WebDriverSetup driverSetup;
+    private WebDriverConfiguration driverSetup;
     private WebDriver driver;
     private SignInPage signInPage;
     private HomePage homePage;
     private ResourceBundle resourceBundle;
     private String browserName;
     private static final Logger logger = LogManager.getLogger(TestRunner.class);
-    private String pageTitle;
+
 
 
     @Before("@LogIn")
     public void setup() {
-        driverSetup = new WebDriverSetup();
+        driverSetup = new WebDriverConfiguration();
         resourceBundle = ResourceBundle.getBundle("config");
         browserName = resourceBundle.getString("browser");
     }
@@ -52,11 +52,7 @@ public class LogInStepdefs {
 
     @Given("I lunch the browser")
     public void iLunchTheBrowser() {
-        if (browserName.equals("chrome"))
-            driver = driverSetup.getChromeDriver();
-        if (browserName.equals("edge"))
-            driver = driverSetup.getEdgeDriver();
-
+        driver = driverSetup.getDriver(browserName);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
@@ -68,6 +64,11 @@ public class LogInStepdefs {
 
     @When("I enter {string}")
     public void iEnter(String email) {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         signInPage.enterEmail(email);
     }
 
@@ -84,9 +85,13 @@ public class LogInStepdefs {
 
     @Then("I will go to my account")
     public void iWillGoToMyAccount() {
-        WebElement element = driver.findElement(By.xpath("//h1[normalize-space()='Your account']"));
-        String actual = element.getText();
-        assertEquals("Your account", actual);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        String actual = driver.getTitle();
+        assertEquals("My account", actual.strip());
     }
 
     @When("I enter invalid {string}")

@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 //        features = {"src/test/resources/features"},
         features = {"src/test/resources/features/logIn.feature"},
         plugin = {"pretty", "html:target/testReport.html", "json:target/jsonReport.json", "rerun:target/rerun.txt"},
-        tags = "Login"
+        tags = "LogIn"
 )
 public class TestRunner {
 
