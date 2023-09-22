@@ -3,6 +3,10 @@ package teststore.chris.pom;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class SignInPage {
 
@@ -24,23 +28,38 @@ public class SignInPage {
     }
 
     private void clickOnCreateAccount() {
-        webDriver.findElement(createAccountButton).click();
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(createAccountButton));
+        element.click();
+//        webDriver.findElement(createAccountButton).click();
     }
 
     public void clickOnForgotPassword() {
-        webDriver.findElement(forgotPasswordButton).click();
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(forgotPasswordButton));
+        element.click();
+//        webDriver.findElement(forgotPasswordButton).click();
     }
 
     public void enterPassword(String password) {
-        webDriver.findElement(passwordField).sendKeys(password);
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(passwordField));
+        element.sendKeys(password);
+//        webDriver.findElement(passwordField).sendKeys(password);
     }
 
     public void enterEmail(String email) {
-        webDriver.findElement(emailField).sendKeys(email);
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(emailField));
+        element.sendKeys(email);
+//        webDriver.findElement(emailField).sendKeys(email);
     }
 
     public void clickOnSignIn() {
-        webDriver.findElement(signInButton).click();
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(signInButton));
+        element.click();
+//        webDriver.findElement(signInButton).click();
     }
     public WebElement getH1LogInToYourAccount() {
         return webDriver.findElement(logInToYourAccountH1);
