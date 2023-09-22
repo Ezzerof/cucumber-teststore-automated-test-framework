@@ -16,7 +16,7 @@ import teststore.chris.TestRunner;
 import teststore.chris.pom.HomePage;
 import teststore.chris.pom.RegistrationPage;
 import teststore.chris.pom.SignInPage;
-import teststore.chris.utils.WebDriverSetup;
+import teststore.chris.utils.WebDriverConfiguration;
 
 import java.time.Duration;
 import java.util.ResourceBundle;
@@ -26,7 +26,7 @@ import org.apache.logging.log4j.Logger;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SignUpStepdefs {
-    private WebDriverSetup driverSetup;
+    private WebDriverConfiguration driverSetup;
     private WebDriver driver;
     private SignInPage signInPage;
     private HomePage homePage;
@@ -40,7 +40,7 @@ public class SignUpStepdefs {
 
     @Before("@CreateUser")
     public void setup() {
-        driverSetup = new WebDriverSetup();
+        driverSetup = new WebDriverConfiguration();
         resourceBundle = ResourceBundle.getBundle("config");
         browserName = resourceBundle.getString("browser");
     }
@@ -58,10 +58,7 @@ public class SignUpStepdefs {
 
     @Given("I lunch browser")
     public void iLunchBrowser() {
-        if (browserName.equals("chrome"))
-            driver = driverSetup.getChromeDriver();
-        if (browserName.equals("edge"))
-            driver = driverSetup.getEdgeDriver();
+        driver = driverSetup.getDriver(browserName);
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
