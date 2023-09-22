@@ -1,5 +1,5 @@
 # Automated Test Framework of Teststore using Cucumber
-This repository contains an automated test framework for Teststore, implemented using Cucumber. The framework utilizes various libraries and tools such as Cucumber, Selenium, JUnit, and Hamcrest to create and execute automated tests.
+This repository contains an automated test framework for Teststore (URL: http://teststore.automationtesting.co.uk/). The framework utilizes various libraries and tools such as Cucumber, Selenium, and Hamcrest to create and execute automated tests. The framework is built around the POM design pattern, which promotes code reusability and maintainability by encapsulating web page elements and their interactions into reusable page objects.
 
 ## Supported Browsers
 
@@ -7,6 +7,7 @@ The automated test framework supports the following browser versions:
 
 - Chrome: Version 114.0.5735.110
 - Edge: Version 114.0.1823.41
+- Safari: Version 16.6 (18615.3.12.11.2)
 
 ## Dependencies
 The following dependencies are required to use the automated test framework:
@@ -16,12 +17,12 @@ The following dependencies are required to use the automated test framework:
     <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-java</artifactId>
-      <version>7.11.1</version>
+      <version>7.14.0</version>
     </dependency>
     <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-junit</artifactId>
-      <version>7.11.1</version>
+      <version>7.14.0</version>
     </dependency>    
 ```
 - Selenium: A web testing framework that provides a set of tools and APIs to automate browser interactions.
@@ -29,7 +30,7 @@ The following dependencies are required to use the automated test framework:
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
-      <version>4.8.3</version>
+      <version>4.12.0</version>
     </dependency>
 ```
 - JUnit: A popular unit testing framework for Java that provides annotations and assertions for test development.
@@ -37,7 +38,7 @@ The following dependencies are required to use the automated test framework:
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>5.9.2</version>
+      <version>5.10.0</version>
     </dependency>
 ```
 - Hamcrest: A library of matchers that can be used with JUnit to create expressive and readable test assertions.
