@@ -10,6 +10,8 @@ import io.cucumber.java.en.When;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import teststore.chris.TestRunner;
 import teststore.chris.pom.HomePage;
 import teststore.chris.pom.SignInPage;
@@ -53,7 +55,8 @@ public class LogInStepdefs {
     @Given("I lunch the browser")
     public void iLunchTheBrowser() {
         driver = driverSetup.getDriver(browserName);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
     }
 
     @And("I go to Log in page")
@@ -62,45 +65,32 @@ public class LogInStepdefs {
         signInPage = homePage.goToSignInPage();
     }
 
-    @When("I enter {string}")
-    public void iEnter(String email) {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+    @When("I enter a valid email {string}")
+    public void iEnterAValidEmail(String email) {
         signInPage.enterEmail(email);
     }
 
-    @And("I then enter {string}")
-    public void iThenEnter(String password) {
+    @And("I then enter password {string}")
+    public void iThenEnterPassword(String password) {
         signInPage.enterPassword(password);
         signInPage.clickOnSignIn();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
     @Then("I will go to my account")
     public void iWillGoToMyAccount() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        String actual = driver.getTitle();
-        assertEquals("My account", actual.strip());
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        boolean flag = wait.until(ExpectedConditions.titleContains("My account"));
+        assertTrue(flag);
     }
 
-    @When("I enter invalid {string}")
-    public void iEnterInvalid(String email) {
+    @When("I enter invalid email {string}")
+    public void iEnterInvalidEmail(String email) {
         signInPage.enterEmail(email);
     }
 
-    @And("I enter an invalid {string}")
-    public void iEnterAnInvalid(String password) {
+    @And("I enter an invalid password {string}")
+    public void iEnterAnInvalidPassword(String password) {
         signInPage.enterPassword(password);
     }
 
