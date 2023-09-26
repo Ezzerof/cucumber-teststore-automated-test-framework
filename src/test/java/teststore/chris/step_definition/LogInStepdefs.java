@@ -43,19 +43,24 @@ public class LogInStepdefs {
 
     @After("@LogIn")
     public void tearDown(Scenario scenario) {
-        System.out.println("Scenario status =======> " + scenario.getStatus());
-        if (scenario.isFailed()) {
-            byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-            scenario.attach(screenshot, "image/png", scenario.getName());
+        try {
+            System.out.println("Scenario status =======> " + scenario.getStatus());
+            if (scenario.isFailed()) {
+                byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+                scenario.attach(screenshot, "image/png", scenario.getName());
+            }
+        } catch (NoSuchSessionException e) {
+            logger.error("WebDriver session is not available. Restarting the session if needed.");
+        } finally {
+            if (driver != null) {
+                driver.quit();
+            }
         }
-        driver.close();
-        driver.quit();
     }
 
     @Given("I lunch the browser")
     public void iLunchTheBrowser() {
         driver = driverSetup.getDriver(browserName);
-//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
     }
 
