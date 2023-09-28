@@ -7,10 +7,9 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import teststore.chris.TestRunner;
 
 import teststore.chris.pom.HomePage;
@@ -23,6 +22,7 @@ import java.util.ResourceBundle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SignUpStepdefs {
@@ -34,7 +34,7 @@ public class SignUpStepdefs {
     private ResourceBundle resourceBundle;
     private String browserName;
 
-    private String userName;
+    private StringBuilder userName = new StringBuilder();
     private static final Logger logger = LogManager.getLogger(TestRunner.class);
 
 
@@ -43,24 +43,29 @@ public class SignUpStepdefs {
         driverSetup = new WebDriverConfiguration();
         resourceBundle = ResourceBundle.getBundle("config");
         browserName = resourceBundle.getString("browser");
+        driver = driverSetup.getDriver(browserName);
     }
 
     @After("@CreateUser")
     public void tearDown(Scenario scenario) {
-        System.out.println("Scenario status =======> " + scenario.getStatus());
-        if (scenario.isFailed()) {
-            byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-            scenario.attach(screenshot, "image/png", scenario.getName());
+        try {
+            System.out.println("Scenario status =======> " + scenario.getStatus());
+            if (scenario.isFailed()) {
+                byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+                scenario.attach(screenshot, "image/png", scenario.getName());
+            }
+        } catch (NoSuchSessionException e) {
+            logger.error("WebDriver session is not available. Restarting the session if needed.");
+        } finally {
+            if (driver != null) {
+                driver.quit();
+            }
         }
-        driver.close();
-        driver.quit();
     }
 
     @Given("I lunch browser")
     public void iLunchBrowser() {
-        driver = driverSetup.getDriver(browserName);
-
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
     }
 
     @And("I go to the Sign in page")
@@ -71,23 +76,21 @@ public class SignUpStepdefs {
 
     @When("I press on No account? Create one here")
     public void iPressOnNoAccountCreateOneHere() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         registrationPage = signInPage.goToRegistration();
     }
 
     @Then("I am on Registration page")
     public void iamOnRegistrationPage() {
-        assertTrue("Create an account".equalsIgnoreCase(driver.findElement(By.cssSelector("header[class='page-header'] h1")).getText()));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[normalize-space()='Create an account']")));
+        assertTrue("Create an account".equalsIgnoreCase(element.getText().strip()));
     }
 
     @And("I go to Registration page")
     public void igoToRegistrationPage() {
-        registrationPage = new RegistrationPage(driver);
-        registrationPage.goToRegistrationPage();
+        homePage = new HomePage(driver);
+        signInPage = homePage.goToSignInPage();
+        registrationPage = signInPage.goToRegistration();
     }
 
     @When("I select Mr.")
@@ -95,45 +98,114 @@ public class SignUpStepdefs {
         registrationPage.selectSocialTitleMr();
     }
 
-    @And("enter first name {string} and last name {string}")
-    public void enterFirstAndLastName(String fName, String lName) {
-        userName = fName + " " + lName;
+    @And("enter first name {string}")
+    public void enterFirstName(String fName) {
         registrationPage.enterFirstName(fName);
-        registrationPage.enterLastName(lName);
+
+        userName.append(fName);
+
+        logger.info("Entered first name: {}", fName);
+
+        String actualFirstName = driver.findElement(By.cssSelector("input[name='firstname']")).getAttribute("value");
+
+        logger.info("Actual first name: {}", actualFirstName);
+
+        assertEquals(actualFirstName, fName);
     }
 
-    @And("enter email {string} and password {string}")
-    public void enterEmailAndPassword(String email, String password) {
-        registrationPage.enterEmail(email);
-        registrationPage.enterPassword(password);
+    @And("enter last name {string}")
+    public void enterLastName(String lName) {
+        registrationPage.enterLastName(lName);
+
+        logger.info("Entered last name: {}", lName);
+
+        userName.append(" ");
+        userName.append(lName);
+
+        String actualLastName = driver.findElement(By.cssSelector("input[name='lastname']")).getAttribute("value");
+
+        logger.info("Actual last name: {}", actualLastName);
+
+        assertEquals(actualLastName, lName);
     }
+
+    @And("enter email {string}")
+    public void enterEmail(String email) {
+        registrationPage.enterEmail(email);
+
+        logger.info("Entered email: {}", email);
+
+        String actualEmail = driver.findElement(By.cssSelector("input[name='email']")).getAttribute("value");
+
+        logger.info("Actual email: {}", actualEmail);
+
+        assertEquals(actualEmail, email);
+    }
+
+    @And("enter password {string}")
+    public void enterPassword(String password) {
+        registrationPage.enterPassword(password);
+
+        logger.info("Entered password: {}", password);
+
+        String actualPassword = driver.findElement(By.cssSelector("input[name='password']")).getAttribute("value");
+
+        logger.info("Actual password: {}", actualPassword);
+
+        assertEquals(actualPassword, password);
+    }
+
 
     @And("enter birthdate {string}")
     public void enterBirthdate(String bDay) {
         registrationPage.enterBirthDate(bDay);
+
+        logger.info("Entered birth day: {}", bDay);
+
+        String actualBDay = driver.findElement(By.cssSelector("input[placeholder='MM/DD/YYYY']")).getAttribute("value");
+
+        logger.info("Actual birth day: {}", actualBDay);
+
+        assertEquals(actualBDay, bDay);
     }
 
     @And("tick all checkboxes")
     public void tickAllCheckboxes() {
-        registrationPage.tickNewsletter();
         registrationPage.tickOffers();
+        registrationPage.tickNewsletter();
         registrationPage.tickPolicyAgreement();
+    }
+
+    @And("tick sign up for newsletters checkbox")
+    public void tickSignUpForNewslettersCheckbox() {
+        registrationPage.tickNewsletter();
+    }
+
+    @And("tick agree terms checkbox")
+    public void tickAgreeTermsCheckbox() {
+        registrationPage.tickPolicyAgreement();
+    }
+
+    @And("tick to receive offers checkbox")
+    public void tickToReceiveCheckbox() {
+        registrationPage.tickOffers();
     }
 
     @And("press on Save button")
     public void pressOnSaveButton() {
         registrationPage.clickSave();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Then("I am logged in")
     public void i_am_logged_in() {
         String accountName = driver.findElement(By.xpath("//span[normalize-space()='"+ userName + "']")).getText();
-        assertTrue(userName.equalsIgnoreCase(accountName));
+
+        if (userName.toString().equalsIgnoreCase(accountName))
+            logger.info("User is logged in.");
+        else
+            logger.info("User is NOT logged in.");
+
+        assertTrue(userName.toString().equalsIgnoreCase(accountName));
     }
 
     @Then("I remain on Registration page")
@@ -145,8 +217,12 @@ public class SignUpStepdefs {
         registrationPage.selectSocialTitleMrs();
     }
 
-    @And("not entering first and last name")
-    public void notEnteringFirstAndLastName() {
+    @And("not entering first name")
+    public void notEnteringFirstName() {
+    }
+
+    @And("not entering last name")
+    public void notEnteringLastName() {
     }
 
     @Then("I see error message")
@@ -157,5 +233,38 @@ public class SignUpStepdefs {
     public void enterNewEmailAndPassword(String email, String password) {
         registrationPage.enterEmail(email);
         registrationPage.enterPassword(password);
+
+        logger.info("Entered email: {}", email);
+        logger.info("Entered password: {}", password);
+
+        String actualEmail = driver.findElement(By.cssSelector("input[name='email']")).getAttribute("value");
+        String actualPassword = driver.findElement(By.cssSelector("input[name='password']")).getAttribute("value");
+
+        logger.info("Actual email: {}", actualEmail);
+        logger.info("Actual password: {}", actualPassword);
+
+        assertEquals(actualEmail, email);
+        assertEquals(actualPassword, password);
     }
+
+    @Then("Mr is selected")
+    public void mrIsSelected() {
+        if (registrationPage.isMrSelected())
+            logger.info("Mr. is selected");
+        else
+            logger.info("Mr. is NOT selected");
+
+        assertTrue(registrationPage.isMrSelected());
+    }
+
+    @Then("Mrs is selected")
+    public void mrsIsSelected() {
+        if (registrationPage.isMrsSelected())
+            logger.info("Mrs. is selected");
+        else
+            logger.info("Mrs. is NOT selected");
+
+        assertTrue(registrationPage.isMrsSelected());
+    }
+
 }

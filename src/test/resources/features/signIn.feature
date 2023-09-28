@@ -8,13 +8,29 @@ Feature: Create user account
     Then I am on Registration page
 
   @CreateUser
+  Scenario: User selects Mr as social title
+    Given  I lunch browser
+    And I go to Registration page
+    When I select Mr.
+    Then Mr is selected
+
+  @CreateUser
+  Scenario: User selects Mrs as social title
+    Given  I lunch browser
+    And I go to Registration page
+    When I select Mrs.
+    Then Mrs is selected
+
+  @CreateUser
   Scenario: Create valid user account
     Given I lunch browser
     And I go to Registration page
     When I select Mr.
-    And enter first name "John" and last name "Williams"
-    And enter email "jo.williams@gmail.com" and password "123456a"
-    And enter birthdate "05/12/2000"
+    And enter first name "Daniel" 
+    And enter last name "Williams"
+    And enter email "dan.williams@gmail.com" 
+    And enter password "123456a"
+    And enter birthdate "10/12/2001"
     And tick all checkboxes
     And press on Save button
     Then I am logged in
@@ -31,9 +47,134 @@ Feature: Create user account
     Given I lunch browser
     And I go to Registration page
     When I select Mrs.
-    And not entering first and last name
-    And enter new email "danniel.williams@gmail.com" and password "123456a"
+    And not entering first name
+    And enter email "danniel.williams@gmail.com" 
+    And enter password "123456a"
     And enter birthdate "05/12/2000"
+    And tick all checkboxes
+    And press on Save button
+    Then I remain on Registration page
+
+  @CreateUser
+  Scenario: Create user account without first name
+    Given I lunch browser
+    And I go to Registration page
+    When I select Mrs.
+    And enter first name "Andrew"
+    And not entering last name
+    And enter email "danniel.williams@gmail.com" 
+    And enter password "123456a"
+    And enter birthdate "05/12/2000"
+    And tick all checkboxes
+    And press on Save button
+    Then I remain on Registration page
+
+  @CreateUser
+  Scenario: Create user account without last name
+    Given I lunch browser
+    And I go to Registration page
+    When I select Mrs.
+    And not entering first name
+    And enter last name "Williams"
+    And enter email "danniel.williams@gmail.com"
+    And enter password "123456a"
+    And enter birthdate "05/12/2000"
+    And tick all checkboxes
+    And press on Save button
+    Then I remain on Registration page  
+
+  @CreateUser
+  Scenario: Create user account without social title
+    Given I lunch browser
+    And I go to Registration page
+    When enter first name "Daniel" 
+    And enter last name "Williams"
+    And enter email "danniel.williams@gmail.com" 
+    And enter password "123456a"
+    And enter birthdate "05/12/2000"
+    And tick all checkboxes
+    And press on Save button
+    Then I remain on Registration page
+
+  @CreateUser
+  Scenario: Create user account without email
+    Given I lunch browser
+    And I go to Registration page
+    When I select Mr.
+    And enter first name "Daniel"
+    And enter last name "Williams"
+    And enter password "123456a"
+    And enter birthdate "05/12/2000"
+    And tick all checkboxes
+    And press on Save button
+    Then I remain on Registration page
+
+  @CreateUser
+  Scenario: Create user account without password
+    Given I lunch browser
+    And I go to Registration page
+    When I select Mr.
+    And enter first name "Daniel"
+    And enter last name "Williams"
+    And enter email "danniel.williams@gmail.com"
+    And enter birthdate "05/12/2000"
+    And tick all checkboxes
+    And press on Save button
+    Then I remain on Registration page
+
+  @CreateUser
+  Scenario: Create user account without selecting to receive offers
+    Given I lunch browser
+    And I go to Registration page
+    When I select Mr.
+    And enter first name "Daniel"
+    And enter last name "Williams"
+    And enter password "123456a"
+    And enter email "danniel.williams@gmail.com"
+    And enter birthdate "05/12/2000"
+    And tick sign up for newsletters checkbox
+    And tick agree terms checkbox
+    And press on Save button
+    Then I am logged in
+
+  @CreateUser
+  Scenario: Create user account without selecting sign up for newsletters
+    Given I lunch browser
+    And I go to Registration page
+    When I select Mr.
+    And enter first name "Daniel"
+    And enter last name "Williams"
+    And enter password "123456a"
+    And enter email "danniel.williams@gmail.com"
+    And enter birthdate "05/12/2000"
+    And tick to receive offers checkbox
+    And tick agree terms checkbox
+    And press on Save button
+    Then I am logged in
+
+  @CreateUser
+  Scenario: Create user account without selecting I agree terms
+    Given I lunch browser
+    And I go to Registration page
+    When I select Mr.
+    And enter first name "Daniel"
+    And enter last name "Williams"
+    And enter password "123456a"
+    And enter email "danniel.williams@gmail.com"
+    And enter birthdate "05/12/2000"
+    And tick to receive offers checkbox
+    And tick sign up for newsletters checkbox
+    And press on Save button
+    Then I remain on Registration page
+
+  @CreateUser
+  Scenario: Create user account without birthday
+    Given I lunch browser
+    And I go to Registration page
+    When I select Mr.
+    And enter first name "Daniel"
+    And enter last name "Williams"
+    And enter email "danniel.williams@gmail.com"
     And tick all checkboxes
     And press on Save button
     Then I remain on Registration page
@@ -43,8 +184,10 @@ Feature: Create user account
     Given I lunch browser
     And I go to Registration page
     When I select Mr.
-    And enter first name "Josh" and last name "Williams"
-    And enter email "josh.williams@gmail.com" and password "123456a"
+    And enter first name "Josh" 
+    And enter last name "Williams"
+    And enter email "josh.williams@gmail.com" 
+    And enter password "123456a"
     And enter birthdate "05/12/2000"
     And tick all checkboxes
     And press on Save button

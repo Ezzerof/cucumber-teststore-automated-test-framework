@@ -23,7 +23,9 @@ public class SignInPage {
     }
 
     public RegistrationPage goToRegistration(){
-        clickOnCreateAccount();
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(createAccountButton));
+        element.click();
         return new RegistrationPage(webDriver);
     }
 
@@ -31,35 +33,30 @@ public class SignInPage {
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(createAccountButton));
         element.click();
-//        webDriver.findElement(createAccountButton).click();
     }
 
     public void clickOnForgotPassword() {
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(forgotPasswordButton));
         element.click();
-//        webDriver.findElement(forgotPasswordButton).click();
     }
 
     public void enterPassword(String password) {
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(passwordField));
         element.sendKeys(password);
-//        webDriver.findElement(passwordField).sendKeys(password);
     }
 
     public void enterEmail(String email) {
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(emailField));
         element.sendKeys(email);
-//        webDriver.findElement(emailField).sendKeys(email);
     }
 
     public void clickOnSignIn() {
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(signInButton));
         element.click();
-//        webDriver.findElement(signInButton).click();
     }
     public WebElement getH1LogInToYourAccount() {
         return webDriver.findElement(logInToYourAccountH1);
