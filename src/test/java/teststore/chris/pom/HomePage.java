@@ -3,6 +3,11 @@ package teststore.chris.pom;
 import io.cucumber.java.ro.Si;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class HomePage {
 
@@ -24,7 +29,9 @@ public class HomePage {
         webDriver.get("http://teststore.automationtesting.co.uk/");
     }
     public SignInPage goToSignInPage() {
-        webDriver.findElement(signInButton).click();
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(signInButton));
+        element.click();
         return new SignInPage(webDriver);
     }
 }
