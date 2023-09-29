@@ -65,18 +65,15 @@ public class RegistrationPage {
     }
 
     public void tickOffers() {
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(offersCheckbox));
-        element.click();
+        webDriver.findElement(offersCheckbox).click();
     }
 
     public void tickNewsletter() {
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(newsletterCheckbox));
-        element.click();
+        webDriver.findElement(newsletterCheckbox).click();
     }
 
     public void tickPolicyAgreement() {
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(policyAgreementCheckbox));
-        element.click();
+        webDriver.findElement(policyAgreementCheckbox).click();
     }
 
     public void clickSave() {
