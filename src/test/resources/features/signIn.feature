@@ -174,6 +174,7 @@ Feature: Create user account
     When I select Mr.
     And enter first name "Daniel"
     And enter last name "Williams"
+    And enter password "123456a"
     And enter email "danniel.williams@gmail.com"
     And tick all checkboxes
     And press on Save button
@@ -192,3 +193,75 @@ Feature: Create user account
     And tick all checkboxes
     And press on Save button
     Then I see error message
+
+  @CreateUser
+  Scenario: Create user with first name that contains digits
+    Given I lunch browser
+    And I go to Registration page
+    When I select Mr.
+    And enter first name with digits "Josh123"
+    And enter last name "Williams"
+    And enter email "josh1.williams@gmail.com"
+    And enter password "123456a"
+    And enter birthdate "05/12/2000"
+    And tick all checkboxes
+    And press on Save button
+    Then I see error message under first name field
+
+  @CreateUser
+  Scenario: Create user with last name that contains digits
+    Given I lunch browser
+    And I go to Registration page
+    When I select Mr.
+    And enter first name with digits "Josh"
+    And enter last name "Williams123"
+    And enter email "josh1.williams@gmail.com"
+    And enter password "123456a"
+    And enter birthdate "05/12/2000"
+    And tick all checkboxes
+    And press on Save button
+    Then I see error message under last name field
+
+  @CreateUser
+  Scenario: Create user with first name that contains symbols
+    Given I lunch browser
+    And I go to Registration page
+    When I select Mr.
+    And enter first name with digits "Josh£@$"
+    And enter last name "Williams"
+    And enter email "josh1.williams@gmail.com"
+    And enter password "123456a"
+    And enter birthdate "05/12/2000"
+    And tick all checkboxes
+    And press on Save button
+    Then I see error message under first name field
+
+  @CreateUser
+  Scenario: Create user with last name that contains symbols
+    Given I lunch browser
+    And I go to Registration page
+    When I select Mr.
+    And enter first name with digits "Josh"
+    And enter last name "Williams£@$"
+    And enter email "josh1.williams@gmail.com"
+    And enter password "123456a"
+    And enter birthdate "05/12/2000"
+    And tick all checkboxes
+    And press on Save button
+    Then I see error message under last name field
+
+  @CreateUser
+  Scenario: Create user with invalid email address
+    Given I lunch browser
+    And I go to Registration page
+    When I select Mr.
+    And enter first name with digits "John"
+    And enter last name "Williams"
+    And enter email "dan.williams.com"
+    And enter password "123456a"
+    And enter birthdate "05/12/2000"
+    And tick all checkboxes
+    And press on Save button
+    Then I remain on Registration page
+
+

@@ -1,0 +1,10 @@
+[INFO] 2023-09-29 16:31:28.636 [main] TestRunner - Entered first name: Josh
+[INFO] 2023-09-29 16:31:28.659 [main] TestRunner - Actual first name: Josh
+[INFO] 2023-09-29 16:31:28.716 [main] TestRunner - Entered last name: Williams
+[INFO] 2023-09-29 16:31:28.730 [main] TestRunner - Actual last name: Williams
+[INFO] 2023-09-29 16:31:28.861 [main] TestRunner - Entered email: d99.williams@gmai.com
+[INFO] 2023-09-29 16:31:28.878 [main] TestRunner - Actual email: d99.williams@gmai.com
+[INFO] 2023-09-29 16:31:28.948 [main] TestRunner - Entered password: 123456a
+[INFO] 2023-09-29 16:31:28.963 [main] TestRunner - Actual password: 123456a
+[INFO] 2023-09-29 16:31:29.018 [main] TestRunner - Entered birth day: 05/12/2000
+[INFO] 2023-09-29 16:31:29.033 [main] TestRunner - Actual birth day: 05/12/2000

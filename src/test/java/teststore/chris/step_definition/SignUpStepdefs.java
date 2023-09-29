@@ -23,6 +23,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SignUpStepdefs {
@@ -206,6 +207,7 @@ public class SignUpStepdefs {
             logger.info("User is NOT logged in.");
 
         assertTrue(userName.toString().equalsIgnoreCase(accountName));
+        userName.setLength(0);
     }
 
     @Then("I remain on Registration page")
@@ -227,6 +229,35 @@ public class SignUpStepdefs {
 
     @Then("I see error message")
     public void iSeeErrorMessage() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebElement errorAlert = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[contains(text(),'The email is already used, please choose another o')]")));
+        String actualMessage = errorAlert.getText();
+
+        logger.info("Error message: {}", actualMessage);
+
+        assertFalse(actualMessage.isEmpty());
+    }
+
+    @Then("I see error message under first name field")
+    public void iSeeErrorMessageUnderFirstNameField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebElement errorAlert = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[contains(text(),'Invalid name')]")));
+        String actualMessage = errorAlert.getText();
+
+        logger.info("Error message: {}", actualMessage);
+
+        assertFalse(actualMessage.isEmpty());
+    }
+
+    @Then("I see error message under last name field")
+    public void iSeeErrorMessageUnderLastNameField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebElement errorAlert = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[contains(text(),'Invalid name')]")));
+        String actualMessage = errorAlert.getText();
+
+        logger.info("Error message: {}", actualMessage);
+
+        assertFalse(actualMessage.isEmpty());
     }
 
     @And("enter new email {string} and password {string}")
@@ -267,4 +298,19 @@ public class SignUpStepdefs {
         assertTrue(registrationPage.isMrsSelected());
     }
 
+    @And("enter first name with digits {string}")
+    public void enterFirstNameWithDigits(String fName) {
+        registrationPage.enterFirstName(fName);
+
+        userName.setLength(0);
+        userName.append(fName);
+
+        logger.info("Entered first name: {}", fName);
+
+        String actualFirstName = driver.findElement(By.cssSelector("input[name='firstname']")).getAttribute("value");
+
+        logger.info("Actual first name: {}", actualFirstName);
+
+        assertEquals(actualFirstName, fName);
+    }
 }
