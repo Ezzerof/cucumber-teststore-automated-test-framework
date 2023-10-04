@@ -264,4 +264,63 @@ Feature: Create user account
     And press on Save button
     Then I remain on Registration page
 
+  @CreateUser
+  Scenario: Create user with a short password
+    Given I lunch browser
+    And I go to Registration page
+    When I select Mr.
+    And enter first name with digits "John"
+    And enter last name "Williams"
+    And enter email "dan21.williams.com"
+    And enter password "1"
+    And enter birthdate "05/12/2000"
+    And tick all checkboxes
+    And press on Save button
+    Then I remain on Registration page
+
+  @CreateUser
+  Scenario: Create a User with wrong birthdate format DD/MM/YYYY
+    Given I lunch browser
+    And I go to Registration page
+    When I select Mr.
+    And enter first name with digits "John"
+    And enter last name "Williams"
+    And enter email "danbb.williams@gmail.com"
+    And enter password "123456a"
+    And enter birthdate "16/06/2021"
+    And tick all checkboxes
+    And press on Save button
+    Then I remain on Registration page
+
+  @CreateUser
+  Scenario: Create a 16 years old user
+    Given I lunch browser
+    And I go to Registration page
+    When I select Mr.
+    And enter first name with digits "John"
+    And enter last name "Williams"
+    And enter email "danbb.williams@gmail.com"
+    And enter password "123456a"
+    And enter birthdate "06/06/2007"
+    And tick all checkboxes
+    And press on Save button
+    Then I remain on Registration page
+
+  @CreateUser
+  Scenario: Create a 100 years old user
+    Given I lunch browser
+    And I go to Registration page
+    When I select Mr.
+    And enter first name with digits "John"
+    And enter last name "Williams"
+    And enter email "johnny1234.williams@gmail.com"
+    And enter password "123456a"
+    And enter birthdate "06/06/1923"
+    And tick all checkboxes
+    And press on Save button
+    Then I remain on Registration page
+
+
+
+
 
