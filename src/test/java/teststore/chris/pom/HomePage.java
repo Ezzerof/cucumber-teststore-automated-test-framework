@@ -34,4 +34,11 @@ public class HomePage {
         element.click();
         return new SignInPage(webDriver);
     }
+
+    public ContactUsPage goToContactUsPage() {
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(contactUsButton));
+        element.click();
+        return new ContactUsPage(webDriver);
+    }
 }
