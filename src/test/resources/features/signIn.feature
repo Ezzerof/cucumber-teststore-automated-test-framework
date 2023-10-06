@@ -1,7 +1,7 @@
 Feature: Create user account
 
   @CreateUser
-  Scenario: User go to Registration page
+  Scenario: User goes to Registration page
     Given I lunch browser
     And I go to the Sign in page
     When I press on No account? Create one here
