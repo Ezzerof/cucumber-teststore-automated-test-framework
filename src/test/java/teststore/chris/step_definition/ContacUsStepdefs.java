@@ -9,10 +9,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.NoSuchSessionException;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 import teststore.chris.TestRunner;
 import teststore.chris.pom.ContactUsPage;
 import teststore.chris.pom.HomePage;
@@ -57,14 +55,14 @@ public class ContacUsStepdefs {
         }
     }
 
-    @Given("I lunch browser")
-    public void iLunchBrowser() {
-        driver.manage().window().maximize();
+    @Given("I am on the Home page")
+    public void iAmOnTheHomePage() {
+//        driver.manage().window().maximize();
+        homePage = new HomePage(driver);
     }
 
     @When("I go to Contact us page")
     public void iGoToContactUsPage() {
-        homePage = new HomePage(driver);
         contactUsPage = homePage.goToContactUsPage();
     }
 
@@ -81,7 +79,6 @@ public class ContacUsStepdefs {
 
     @Given("I am on Contact us page")
     public void iAmOnContactUsPage() {
-
     }
 
     @And("I select as a subject customer service")

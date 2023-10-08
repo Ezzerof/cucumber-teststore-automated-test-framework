@@ -15,7 +15,7 @@ public class WebDriverConfiguration implements WebDriverSetup {
     public void setDriver(String type) {
         switch (type) {
             case "CHROME_WIN" -> {
-                System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+//                System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
                 driver = new ChromeDriver();
             }
             case "CHROME_ARM" -> {

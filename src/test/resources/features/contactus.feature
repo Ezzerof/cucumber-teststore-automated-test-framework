@@ -2,7 +2,7 @@ Feature: User sends a request through contact us
 
   @ContactUs
   Scenario: User goes to Contact us page
-    Given I lunch the browser
+    Given I am on the Home page
     When I go to Contact us page
     Then I am on the Contact us page
 

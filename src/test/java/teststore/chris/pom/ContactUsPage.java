@@ -2,6 +2,8 @@ package teststore.chris.pom;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 public class ContactUsPage {
     private WebDriver webDriver;
@@ -14,5 +16,19 @@ public class ContactUsPage {
 
     public ContactUsPage(WebDriver webDriver) {
         this.webDriver = webDriver;
+    }
+
+    public String selectCustomerService() {
+        Select selector = new Select(webDriver.findElement(subjectSelector));
+        WebElement element = selector.getFirstSelectedOption();
+        return element.getText();
+    }
+
+    public String selectWebmaster() {
+        Select selector = new Select(webDriver.findElement(subjectSelector));
+        selector.selectByIndex(1);
+
+        WebElement element = selector.getFirstSelectedOption();
+        return element.getText();
     }
 }
