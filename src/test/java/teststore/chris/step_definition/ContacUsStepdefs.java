@@ -10,7 +10,6 @@ import io.cucumber.java.en.When;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import teststore.chris.TestRunner;
 import teststore.chris.pom.ContactUsPage;
 import teststore.chris.pom.HomePage;
@@ -19,6 +18,7 @@ import teststore.chris.utils.WebDriverConfiguration;
 import java.util.ResourceBundle;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ContacUsStepdefs {
     private ContactUsPage contactUsPage;
@@ -55,9 +55,9 @@ public class ContacUsStepdefs {
         }
     }
 
-    @Given("I am on the Home page")
-    public void iAmOnTheHomePage() {
-//        driver.manage().window().maximize();
+    @Given("lunch the browser")
+    public void lunchTheBrowser() {
+        driver.manage().window().maximize();
         homePage = new HomePage(driver);
     }
 
@@ -77,27 +77,77 @@ public class ContacUsStepdefs {
         assertEquals(expectedPageTitle, actualPageTitle);
     }
 
-    @Given("I am on Contact us page")
-    public void iAmOnContactUsPage() {
-    }
-
     @And("I select as a subject customer service")
     public void iSelectAsASubjectCustomerService() {
+        String actualSubject = contactUsPage.selectCustomerService();
+        String expectedSubject = "Customer service";
+
+        if (actualSubject.equals(expectedSubject))
+            logger.info("Test passed");
+        else
+            logger.info("Test failed - Wrong Subject selected");
+
+        logger.debug("Actual selection is: {}", actualSubject);
+        logger.debug("Expected selection is: {}", expectedSubject);
+
+        assertEquals(actualSubject, expectedSubject);
     }
 
     @And("I enter a message {string}")
     public void iEnterAMessage(String msg) {
+        contactUsPage.enterMessage(msg);
+        String actualMessage = driver.findElement(By.xpath("textarea[placeholder='How can we help?']")).getAttribute("value");
+
+        if (actualMessage.equals(msg))
+            logger.info("Test passed");
+        else
+            logger.info("Test failed - Message mismatch");
+
+        logger.debug("Actual message is: {}", actualMessage);
+        logger.debug("Expected message is: {}", msg);
+
+        assertEquals(actualMessage, msg);
     }
 
     @And("I tick the checkbox")
     public void iTickTheCheckbox() {
+        WebElement checkbox = contactUsPage.tickCheckbox();
+
+        if (!checkbox.isSelected())
+            logger.info("Step failed - Checkbox not selected");
+
+        assertTrue(checkbox.isSelected());
     }
 
     @When("I press on Send button")
     public void iPressOnSendButton() {
+        contactUsPage.clickSend();
     }
 
     @Then("I should see the message {string}")
-    public void iShouldSeeTheMessage(String arg0) {
+    public void iShouldSeeTheMessage(String msg) {
+        String actualMessage = contactUsPage.checkMessage();
+
+        if (!actualMessage.equals(msg)) {
+            logger.warn("Wrong message: {}", actualMessage);
+        }
+
+        assertEquals(msg, actualMessage);
+    }
+
+    @And("I enter an email {string}")
+    public void iEnterAnEmail(String email) {
+        WebElement emailField = contactUsPage.enterEmail(email);
+        String actualEmail = emailField.getAttribute("value");
+
+        if (actualEmail.equals(email))
+            logger.info("Test passed");
+        else
+            logger.info("Test failed - Email mismatch");
+
+        logger.debug("Actual email: {}", actualEmail);
+        logger.debug("Expected email: {}", email);
+
+        assertEquals(actualEmail, email);
     }
 }
