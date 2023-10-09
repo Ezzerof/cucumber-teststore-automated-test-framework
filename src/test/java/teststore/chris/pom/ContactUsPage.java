@@ -8,12 +8,14 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class ContactUsPage {
     private WebDriver webDriver;
     private final By subjectSelector = new By.ByCssSelector("select[name='id_contact']");
     private final By emailField = new By.ByCssSelector("input[placeholder='your@email.com']");
     private final By messageField = new By.ByCssSelector("textarea[placeholder='How can we help?']");
+    private final By errorMessageField = new By.ByXPath("//div[@class='col-xs-12 alert alert-danger']");
     private final By checkbox = new By.ByCssSelector("#psgdpr_consent_checkbox_1");
     private final By sendButton = new By.ByCssSelector("input[value='Send']");
     private final By confirmationMessage = new By.ByCssSelector("div[class='col-xs-12 alert alert-success'] ul li");
@@ -22,10 +24,29 @@ public class ContactUsPage {
         this.webDriver = webDriver;
     }
 
+    public boolean isSendButtonClickable() {
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+        WebElement element = webDriver.findElement(sendButton);
+        String disabledAttribute = element.getAttribute("disabled");
+        return disabledAttribute != null && disabledAttribute.equals("disabled");
+    }
+
     public String checkMessage() {
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(confirmationMessage));
         return element.getText();
+    }
+
+    public String checkErrorMessage() {
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessageField));
+        List<WebElement> errorMessages = element.findElements(By.xpath(".//li"));
+
+        String messageText = null;
+        for (WebElement errorMessage : errorMessages)
+            messageText = errorMessage.getText();
+
+        return messageText;
     }
     public void clickSend() {
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));

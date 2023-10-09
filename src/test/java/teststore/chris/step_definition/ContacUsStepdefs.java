@@ -17,8 +17,7 @@ import teststore.chris.utils.WebDriverConfiguration;
 
 import java.util.ResourceBundle;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class ContacUsStepdefs {
     private ContactUsPage contactUsPage;
@@ -71,10 +70,19 @@ public class ContacUsStepdefs {
         String expectedPageTitle = "Contact us";
         String actualPageTitle = driver.getTitle();
 
-        logger.info("Expected page title: {}", expectedPageTitle);
-        logger.info("Actual page title: {}", actualPageTitle);
+        if (!expectedPageTitle.equals(actualPageTitle)) {
+            logger.info("Step failed - Wrong Page");
+            logger.info("Expected page title: {}", expectedPageTitle);
+            logger.info("Actual page title: {}", actualPageTitle);
+        }
 
         assertEquals(expectedPageTitle, actualPageTitle);
+    }
+
+    @Given("I am on Contact us page")
+    public void iAmOnContactUsPage() {
+        homePage = new HomePage(driver);
+        contactUsPage = homePage.goToContactUsPage();
     }
 
     @And("I select as a subject customer service")
@@ -82,13 +90,11 @@ public class ContacUsStepdefs {
         String actualSubject = contactUsPage.selectCustomerService();
         String expectedSubject = "Customer service";
 
-        if (actualSubject.equals(expectedSubject))
-            logger.info("Test passed");
-        else
-            logger.info("Test failed - Wrong Subject selected");
-
-        logger.debug("Actual selection is: {}", actualSubject);
-        logger.debug("Expected selection is: {}", expectedSubject);
+        if (!actualSubject.equals(expectedSubject)) {
+            logger.info("Step failed - Wrong Subject selected");
+            logger.debug("Actual selection is: {}", actualSubject);
+            logger.debug("Expected selection is: {}", expectedSubject);
+        }
 
         assertEquals(actualSubject, expectedSubject);
     }
@@ -96,15 +102,13 @@ public class ContacUsStepdefs {
     @And("I enter a message {string}")
     public void iEnterAMessage(String msg) {
         contactUsPage.enterMessage(msg);
-        String actualMessage = driver.findElement(By.xpath("textarea[placeholder='How can we help?']")).getAttribute("value");
+        String actualMessage = driver.findElement(By.cssSelector("textarea[placeholder='How can we help?']")).getAttribute("value");
 
-        if (actualMessage.equals(msg))
-            logger.info("Test passed");
-        else
-            logger.info("Test failed - Message mismatch");
-
-        logger.debug("Actual message is: {}", actualMessage);
-        logger.debug("Expected message is: {}", msg);
+        if (!actualMessage.equals(msg)) {
+            logger.info("Step failed - Message mismatch");
+            logger.debug("Actual message is: {}", actualMessage);
+            logger.debug("Expected message is: {}", msg);
+        }
 
         assertEquals(actualMessage, msg);
     }
@@ -140,14 +144,66 @@ public class ContacUsStepdefs {
         WebElement emailField = contactUsPage.enterEmail(email);
         String actualEmail = emailField.getAttribute("value");
 
-        if (actualEmail.equals(email))
-            logger.info("Test passed");
-        else
-            logger.info("Test failed - Email mismatch");
-
-        logger.debug("Actual email: {}", actualEmail);
-        logger.debug("Expected email: {}", email);
+        if (!actualEmail.equals(email)) {
+            logger.info("Step failed - Email mismatch");
+            logger.debug("Actual email: {}", actualEmail);
+            logger.debug("Expected email: {}", email);
+        }
 
         assertEquals(actualEmail, email);
+    }
+
+    @And("I select as a subject webmaster")
+    public void iSelectAsASubjectWebmaster() {
+        String actualSubject = contactUsPage.selectWebmaster();
+        String expectedSubject = "Webmaster";
+
+        if (!actualSubject.equals(expectedSubject)) {
+            logger.info("Step failed - Wrong Subject selected");
+            logger.debug("Actual selection is: {}", actualSubject);
+            logger.debug("Expected selection is: {}", expectedSubject);
+        }
+
+        assertEquals(actualSubject, expectedSubject);
+    }
+
+    @Then("I should remain on the Contact us page and see the message {string}")
+    public void iShouldRemainOnTheContactUsPageAndSeeTheMessage(String msg) {
+        String actualMessage = contactUsPage.checkErrorMessage();
+        String expectedPageTitle = "Contact us";
+        String actualPageTitle = driver.getTitle();
+
+        if (!actualMessage.equals(msg)) {
+            logger.info("Step failed - Wrong error message");
+            logger.warn("Actual message: {}", actualMessage);
+            logger.warn("Expected message: {}", msg);
+        }
+
+        assertEquals(msg, actualMessage);
+        assertEquals(actualPageTitle, expectedPageTitle);
+    }
+
+    @Then("The Send button should not be clickable")
+    public void theSendButtonShouldNotBeClickable() {
+
+        if (contactUsPage.isSendButtonClickable()) {
+            logger.warn("Step failed - Send Button is clickable");
+        }
+
+        assertFalse(contactUsPage.isSendButtonClickable());
+    }
+
+    @Then("I should remain on the Contact us page")
+    public void iShouldRemainOnTheContactUsPage() {
+        String expectedPageTitle = "Contact us";
+        String actualPageTitle = driver.getTitle();
+
+        if (!expectedPageTitle.equals(actualPageTitle)) {
+            logger.info("Step failed - Wrong page");
+            logger.warn("Actual page: {}", actualPageTitle);
+            logger.warn("Expected page: {}", expectedPageTitle);
+        }
+
+        assertEquals(actualPageTitle, expectedPageTitle);
     }
 }
