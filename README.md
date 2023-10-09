@@ -1,5 +1,8 @@
 # Automated Test Framework of Teststore using Cucumber
-This repository contains an automated test framework for Teststore (URL: http://teststore.automationtesting.co.uk/). The framework utilizes various libraries and tools such as Cucumber, Selenium, and Hamcrest to create and execute automated tests. The framework is built around the POM design pattern, which promotes code reusability and maintainability by encapsulating web page elements and their interactions into reusable page objects.
+This repository contains an automated test framework for Teststore. The framework utilizes various libraries and tools such as Cucumber, Selenium, and Hamcrest to create and execute automated tests. The framework is built around the POM design pattern, which promotes code reusability and maintainability by encapsulating web page elements and their interactions into reusable page objects.
+
+Trello board: https://trello.com/invite/b/qEnkEvty/ATTI5af4fffdaaaa764da1aa6e354feee784AAC55B6C/teststore
+Application under test: http://teststore.automationtesting.co.uk/
 
 ## Supported Browsers
 

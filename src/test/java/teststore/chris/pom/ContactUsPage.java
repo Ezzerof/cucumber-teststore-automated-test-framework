@@ -44,6 +44,7 @@ public class ContactUsPage {
         WebElement element = selector.getFirstSelectedOption();
         return element.getText();
     }
+
     public String selectWebmaster() {
         Select selector = new Select(webDriver.findElement(subjectSelector));
         selector.selectByIndex(1);

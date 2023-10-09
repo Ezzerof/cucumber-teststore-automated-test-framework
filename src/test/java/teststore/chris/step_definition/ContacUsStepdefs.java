@@ -77,12 +77,6 @@ public class ContacUsStepdefs {
         assertEquals(expectedPageTitle, actualPageTitle);
     }
 
-    @Given("I am on Contact us page")
-    public void iAmOnContactUsPage() {
-        homePage = new HomePage(driver);
-        contactUsPage = homePage.goToContactUsPage();
-    }
-
     @And("I select as a subject customer service")
     public void iSelectAsASubjectCustomerService() {
         String actualSubject = contactUsPage.selectCustomerService();
