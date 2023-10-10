@@ -13,6 +13,7 @@ import org.openqa.selenium.*;
 import teststore.chris.TestRunner;
 import teststore.chris.pom.ContactUsPage;
 import teststore.chris.pom.HomePage;
+import teststore.chris.pom.RegistrationPage;
 import teststore.chris.utils.WebDriverConfiguration;
 
 import java.util.ResourceBundle;
@@ -21,12 +22,13 @@ import static org.junit.Assert.*;
 
 public class ContacUsStepdefs {
     private ContactUsPage contactUsPage;
-    private WebDriver driver;
-    private WebDriverConfiguration driverSetup;
-    private ResourceBundle resourceBundle;
     private HomePage homePage;
+    private WebDriverConfiguration driverSetup;
+    private WebDriver driver;
+    private RegistrationPage registrationPage;
+    private ResourceBundle resourceBundle;
     private String browserName;
-    private static final Logger logger = LogManager.getLogger(TestRunner.class);
+    private static final Logger logger = LogManager.getLogger(ContacUsStepdefs.class);
 
 
     @Before("@ContactUs")

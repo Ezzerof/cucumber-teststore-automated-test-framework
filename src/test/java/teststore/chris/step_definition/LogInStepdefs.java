@@ -12,7 +12,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import teststore.chris.TestRunner;
 import teststore.chris.pom.HomePage;
 import teststore.chris.pom.SignInPage;
 import teststore.chris.utils.WebDriverConfiguration;
@@ -30,7 +29,7 @@ public class LogInStepdefs {
     private HomePage homePage;
     private ResourceBundle resourceBundle;
     private String browserName;
-    private static final Logger logger = LogManager.getLogger(TestRunner.class);
+    private static final Logger logger = LogManager.getLogger(LogInStepdefs.class);
 
 
 
@@ -39,6 +38,7 @@ public class LogInStepdefs {
         driverSetup = new WebDriverConfiguration();
         resourceBundle = ResourceBundle.getBundle("config");
         browserName = resourceBundle.getString("browser");
+        driver = driverSetup.getDriver(browserName);
     }
 
     @After("@LogIn")
@@ -60,7 +60,6 @@ public class LogInStepdefs {
 
     @Given("I lunch the browser")
     public void iLunchTheBrowser() {
-        driver = driverSetup.getDriver(browserName);
         driver.manage().window().maximize();
     }
 
