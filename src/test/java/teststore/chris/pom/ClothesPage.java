@@ -19,4 +19,8 @@ public class ClothesPage {
     private final By shortSleeves = new By.ByXPath("//label[@for='facet_input_55858_1']//span[@class='ps-shown-by-js']");
     private final By firstItem = new By.ByCssSelector("img[alt='Hummingbird printed t-shirt']");
     private final By secondItem = new By.ByCssSelector("img[alt='Brown bear printed sweater']");
+
+    public ClothesPage(WebDriver webDriver) {
+        this.webDriver = webDriver;
+    }
 }
