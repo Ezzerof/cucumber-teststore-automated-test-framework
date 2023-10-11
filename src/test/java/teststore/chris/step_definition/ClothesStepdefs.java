@@ -8,13 +8,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.NoSuchSessionException;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import teststore.chris.pom.ClothesPage;
 import teststore.chris.pom.HomePage;
-import teststore.chris.pom.RegistrationPage;
 import teststore.chris.utils.WebDriverConfiguration;
 
 import java.util.ResourceBundle;
@@ -35,6 +31,9 @@ public class ClothesStepdefs {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("config");
         String browserName = resourceBundle.getString("browser");
         driver = driverSetup.getDriver(browserName);
+        Point p = new Point(0, 0);
+        driver.manage().window().setPosition(p);
+        driver.manage().window().setSize(new Dimension(1000, 800));
     }
 
     @After("@Clothes")
