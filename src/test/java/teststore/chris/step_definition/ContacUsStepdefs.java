@@ -37,6 +37,9 @@ public class ContacUsStepdefs {
         resourceBundle = ResourceBundle.getBundle("config");
         browserName = resourceBundle.getString("browser");
         driver = driverSetup.getDriver(browserName);
+        Point p = new Point(0, 0);
+        driver.manage().window().setPosition(p);
+        driver.manage().window().setSize(new Dimension(1000, 800));
     }
 
     @After("@ContactUs")
