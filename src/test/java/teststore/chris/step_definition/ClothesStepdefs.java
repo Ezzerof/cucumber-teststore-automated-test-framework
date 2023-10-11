@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import teststore.chris.pom.ClothesPage;
 import teststore.chris.pom.HomePage;
+import teststore.chris.utils.ScreenshotToPng;
 import teststore.chris.utils.WebDriverConfiguration;
 
 import java.util.ResourceBundle;
@@ -43,6 +44,7 @@ public class ClothesStepdefs {
             if (scenario.isFailed()) {
                 byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
                 scenario.attach(screenshot, "image/png", scenario.getName());
+                ScreenshotToPng.takeScreenshot("src/test/resources/screenshots", scenario, screenshot);
             }
         } catch (NoSuchSessionException e) {
             logger.error("WebDriver session is not available. Restarting the session if needed.");
