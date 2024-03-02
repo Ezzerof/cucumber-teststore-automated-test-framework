@@ -1,4 +1,4 @@
-package teststore.chris.step_definition;
+package teststore.chris.stepdefinition;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -9,8 +9,8 @@ import io.cucumber.java.en.When;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
-import teststore.chris.pom.ClothesPage;
-import teststore.chris.pom.HomePage;
+import teststore.chris.pages.ClothesPage;
+import teststore.chris.pages.HomePage;
 import teststore.chris.utils.ScreenshotToPng;
 import teststore.chris.utils.WebDriverConfiguration;
 
@@ -18,13 +18,13 @@ import java.util.ResourceBundle;
 
 import static org.junit.Assert.assertEquals;
 
-public class ClothesStepdefs {
+public class ClothesSteps {
 
     private ClothesPage clothesPage;
     private HomePage homePage;
     private WebDriverConfiguration driverSetup;
     private WebDriver driver;
-    private static final Logger logger = LogManager.getLogger(ClothesStepdefs.class);
+    private static final Logger logger = LogManager.getLogger(ClothesSteps.class);
 
     @Before("@Clothes")
     public void setup() {

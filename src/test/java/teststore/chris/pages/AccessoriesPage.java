@@ -1,4 +1,4 @@
-package teststore.chris.pom;
+package teststore.chris.pages;
 
 public class AccessoriesPage {
 }

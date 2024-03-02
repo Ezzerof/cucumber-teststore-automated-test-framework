@@ -1,4 +1,4 @@
-package teststore.chris.step_definition;
+package teststore.chris.stepdefinition;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -10,17 +10,16 @@ import io.cucumber.java.en.When;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
-import teststore.chris.TestRunner;
-import teststore.chris.pom.ContactUsPage;
-import teststore.chris.pom.HomePage;
-import teststore.chris.pom.RegistrationPage;
+import teststore.chris.pages.ContactUsPage;
+import teststore.chris.pages.HomePage;
+import teststore.chris.pages.RegistrationPage;
 import teststore.chris.utils.WebDriverConfiguration;
 
 import java.util.ResourceBundle;
 
 import static org.junit.Assert.*;
 
-public class ContacUsStepdefs {
+public class ContacUsSteps {
     private ContactUsPage contactUsPage;
     private HomePage homePage;
     private WebDriverConfiguration driverSetup;
@@ -28,7 +27,7 @@ public class ContacUsStepdefs {
     private RegistrationPage registrationPage;
     private ResourceBundle resourceBundle;
     private String browserName;
-    private static final Logger logger = LogManager.getLogger(ContacUsStepdefs.class);
+    private static final Logger logger = LogManager.getLogger(ContacUsSteps.class);
 
 
     @Before("@ContactUs")

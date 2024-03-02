@@ -1,8 +1,6 @@
-package teststore.chris.pom;
+package teststore.chris.pages;
 
-import org.apache.logging.log4j.core.util.FileUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
