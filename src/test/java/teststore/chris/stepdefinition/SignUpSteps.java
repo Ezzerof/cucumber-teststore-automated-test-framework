@@ -1,4 +1,4 @@
-package teststore.chris.step_definition;
+package teststore.chris.stepdefinition;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -8,14 +8,13 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import teststore.chris.TestRunner;
 
-import teststore.chris.pom.HomePage;
-import teststore.chris.pom.RegistrationPage;
-import teststore.chris.pom.SignInPage;
+import teststore.chris.pages.HomePage;
+import teststore.chris.pages.RegistrationPage;
+import teststore.chris.pages.SignInPage;
 import teststore.chris.utils.WebDriverConfiguration;
 
 import java.time.Duration;
@@ -27,7 +26,7 @@ import static junit.framework.TestCase.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class SignUpStepdefs {
+public class SignUpSteps {
     private WebDriverConfiguration driverSetup;
     private WebDriver driver;
     private SignInPage signInPage;

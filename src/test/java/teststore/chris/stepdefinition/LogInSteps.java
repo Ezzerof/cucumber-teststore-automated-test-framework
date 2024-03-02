@@ -1,4 +1,4 @@
-package teststore.chris.step_definition;
+package teststore.chris.stepdefinition;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -12,8 +12,8 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import teststore.chris.pom.HomePage;
-import teststore.chris.pom.SignInPage;
+import teststore.chris.pages.HomePage;
+import teststore.chris.pages.SignInPage;
 import teststore.chris.utils.WebDriverConfiguration;
 
 import java.time.Duration;
@@ -22,14 +22,14 @@ import java.util.ResourceBundle;
 import static org.junit.Assert.*;
 
 
-public class LogInStepdefs {
+public class LogInSteps {
     private WebDriverConfiguration driverSetup;
     private WebDriver driver;
     private SignInPage signInPage;
     private HomePage homePage;
     private ResourceBundle resourceBundle;
     private String browserName;
-    private static final Logger logger = LogManager.getLogger(LogInStepdefs.class);
+    private static final Logger logger = LogManager.getLogger(LogInSteps.class);
 
 
 
