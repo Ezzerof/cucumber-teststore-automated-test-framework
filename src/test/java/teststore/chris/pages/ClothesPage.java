@@ -2,7 +2,9 @@ package teststore.chris.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ClothesPage {
     private WebDriver webDriver;
     private final By menCategory = new By.ByXPath("//ul[@class='category-sub-menu']//a[contains(text(),'Men')]");

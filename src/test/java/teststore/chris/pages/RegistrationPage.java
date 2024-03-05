@@ -5,9 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.stereotype.Component;
 
 import java.time.Duration;
-
+@Component
 public class RegistrationPage {
     private WebDriver webDriver;
     private final By loginButton = new By.ByXPath("//a[normalize-space()='Log in instead!']");

@@ -2,7 +2,9 @@ package teststore.chris.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CartPage {
     private WebDriver webDriver;
     private final By proceedToCheckoutButton = new By.ByCssSelector("a[class='btn btn-primary']");
