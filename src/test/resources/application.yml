@@ -1,0 +1,7 @@
+context: remote
+browser: chrome
+host: http://teststore.automationtesting.co.uk/
+
+logging:
+  level:
+    ROOT: ERROR

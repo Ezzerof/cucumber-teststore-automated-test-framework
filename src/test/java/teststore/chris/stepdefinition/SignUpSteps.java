@@ -10,7 +10,7 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import teststore.chris.TestRunner;
+import teststore.chris.CucumberRunner;
 
 import teststore.chris.pages.HomePage;
 import teststore.chris.pages.RegistrationPage;
@@ -36,7 +36,7 @@ public class SignUpSteps {
     private String browserName;
 
     private StringBuilder userName = new StringBuilder();
-    private static final Logger logger = LogManager.getLogger(TestRunner.class);
+    private static final Logger logger = LogManager.getLogger(CucumberRunner.class);
 
 
     @Before("@CreateUser")

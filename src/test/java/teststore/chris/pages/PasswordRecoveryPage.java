@@ -2,7 +2,9 @@ package teststore.chris.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PasswordRecoveryPage {
 
     private WebDriver webDriver;
